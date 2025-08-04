@@ -12,7 +12,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1 className="text-2xl font-bold bg-gradient-tech bg-clip-text text-transparent">
-              TriExpert Services AI
+              n8n-tech.cloud
             </h1>
           </div>
 

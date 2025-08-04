@@ -88,7 +88,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-1">Email</h3>
-                      <p className="text-muted-foreground">contacto@triexpert.ai</p>
+                      <p className="text-muted-foreground">contacto@n8n-tech.cloud</p>
                       <p className="text-sm text-muted-foreground">Respuesta en menos de 2 horas</p>
                     </div>
                   </div>
@@ -103,7 +103,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-1">Teléfono</h3>
-                      <p className="text-muted-foreground">+1 813 710 8860</p>
+                      <p className="text-muted-foreground">+34 900 000 000</p>
                       <p className="text-sm text-muted-foreground">Lunes a Viernes, 9:00 - 18:00</p>
                     </div>
                   </div>
@@ -129,7 +129,7 @@ const Contact = () => {
             {/* Why Choose Us */}
             <Card className="bg-gradient-tech text-white shadow-card-custom border-0">
               <CardHeader>
-                <CardTitle className="text-xl text-white">¿Por qué elegir TriExpert Services AI?</CardTitle>
+                <CardTitle className="text-xl text-white">¿Por qué elegir n8n-tech.cloud?</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-3">
