@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
-              n8n-tech.cloud
+              TriExpert Services AI
             </h3>
             <p className="text-blue-100 mb-6 max-w-md">
               Transformamos empresas a través de la automatización inteligente con IA y n8n. 
@@ -44,11 +44,11 @@ const Footer = () => {
             <div className="space-y-3 text-blue-100">
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">contacto@n8n-tech.cloud</span>
+                <span className="text-sm">contacto@triexpert.ai</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">+34 900 000 000</span>
+                <span className="text-sm">+1 813 710 8860</span>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@ const Footer = () => {
 
         <div className="border-t border-white/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-blue-100 text-sm">
-            © 2024 n8n-tech.cloud. Todos los derechos reservados.
+            © 2024 TriExpert Services AI. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-blue-100 hover:text-white text-sm transition-colors">Política de Privacidad</a>
