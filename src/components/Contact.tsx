@@ -38,7 +38,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://app.n8n-tech.cloud/webhook/n8n', {
+      const response = await fetch('/api/webhook/n8n', {
         method: 'POST',
         mode: 'cors',
         headers: {
