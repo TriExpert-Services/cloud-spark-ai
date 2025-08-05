@@ -5,17 +5,12 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contacto');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false); // Close mobile menu after navigation
   };
 
   return (
@@ -34,28 +29,43 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <button onClick={() => scrollToSection('inicio')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              <button 
+                onClick={() => scrollToSection('inicio')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+              >
                 Inicio
               </button>
-              <button onClick={() => scrollToSection('servicios')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              <button 
+                onClick={() => scrollToSection('servicios')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+              >
                 Servicios
               </button>
-              <button onClick={() => scrollToSection('soluciones')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              <button 
+                onClick={() => scrollToSection('soluciones')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+              >
                 Soluciones
               </button>
-              <button onClick={() => scrollToContact()} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
-                Contacto
-              </button>
-              <button onClick={() => scrollToSection('blog')} className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer">
+              <button 
+                onClick={() => scrollToSection('blog')} 
+                className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer"
+              >
                 Blog
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              </button>
+              <button 
+                onClick={() => scrollToSection('contacto')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+              >
+                Contacto
               </button>
             </div>
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="sm" onClick={scrollToContact}>
+            <Button variant="hero" size="sm" onClick={() => scrollToSection('contacto')}>
               Consulta Gratuita
             </Button>
           </div>
@@ -76,23 +86,38 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
-              <button onClick={() => { scrollToSection('inicio'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
+              <button 
+                onClick={() => scrollToSection('inicio')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+              >
                 Inicio
               </button>
-              <button onClick={() => { scrollToSection('servicios'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
+              <button 
+                onClick={() => scrollToSection('servicios')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+              >
                 Servicios
               </button>
-              <button onClick={() => { scrollToSection('soluciones'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
+              <button 
+                onClick={() => scrollToSection('soluciones')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+              >
                 Soluciones
               </button>
-              <button onClick={() => { scrollToSection('blog'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
+              <button 
+                onClick={() => scrollToSection('blog')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+              >
                 Blog
               </button>
-              <button onClick={() => { scrollToContact(); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
+              <button 
+                onClick={() => scrollToSection('contacto')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+              >
                 Contacto
               </button>
               <div className="pt-2">
-                <Button variant="hero" size="sm" className="w-full" onClick={scrollToContact}>
+                <Button variant="hero" size="sm" className="w-full" onClick={() => scrollToSection('contacto')}>
                   Consulta Gratuita
                 </Button>
               </div>
