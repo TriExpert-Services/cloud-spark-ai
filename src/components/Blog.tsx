@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, ArrowRight, Brain, Cpu, Zap, TrendingUp } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Brain, Cpu, Zap, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 
 const Blog = () => {
-  const [selectedPost, setSelectedPost] = useState<any>(null);
+  const [expandedPost, setExpandedPost] = useState<number | null>(null);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contacto');
@@ -235,6 +234,10 @@ const Blog = () => {
     return icons[category] || <Zap className="w-4 h-4" />;
   };
 
+  const togglePost = (postId: number) => {
+    setExpandedPost(expandedPost === postId ? null : postId);
+  };
+
   return (
     <section id="blog" className="py-20 bg-gradient-subtle relative overflow-hidden">
       {/* Background Pattern */}
@@ -280,9 +283,9 @@ const Blog = () => {
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 relative z-10">
           {filteredPosts.map((post) => (
-            <Card key={post.id} className="overflow-hidden group hover:shadow-neural transition-neural border-0 shadow-card-custom ai-glow cursor-pointer">
+            <Card key={post.id} className="overflow-hidden group hover:shadow-neural transition-neural border-0 shadow-card-custom ai-glow">
               {/* Post Image */}
               <div className="relative overflow-hidden h-48">
                 <img 
@@ -298,7 +301,7 @@ const Blog = () => {
               </div>
               
               <CardHeader className="pb-4">
-                <CardTitle className="text-xl group-hover:text-gradient-ai transition-colors duration-300 line-clamp-2">
+                <CardTitle className="text-xl group-hover:text-gradient-ai transition-colors duration-300">
                   {post.title}
                 </CardTitle>
                 <CardDescription className="line-clamp-3">
@@ -327,16 +330,70 @@ const Blog = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => {
-                      console.log('Opening post:', post.id);
-                      setSelectedPost(post);
-                    }}
+                    onClick={() => togglePost(post.id)}
                     className="group/btn hover:bg-gradient-ai/10"
                   >
-                    Leer más
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    {expandedPost === post.id ? 'Ocultar' : 'Leer más'}
+                    {expandedPost === post.id ? (
+                      <ChevronUp className="ml-2 h-4 w-4 group-hover/btn:translate-y-1 transition-transform" />
+                    ) : (
+                      <ChevronDown className="ml-2 h-4 w-4 group-hover/btn:translate-y-1 transition-transform" />
+                    )}
                   </Button>
                 </div>
+
+                {/* Expanded Content */}
+                {expandedPost === post.id && (
+                  <div className="mt-6 pt-6 border-t border-border space-y-6 animate-in slide-in-from-top-2 duration-300">
+                    {/* Introduction */}
+                    <p className="text-muted-foreground leading-relaxed text-base">
+                      {post.content.introduction}
+                    </p>
+                    
+                    {/* Content Sections */}
+                    {post.content.sections.map((section, idx) => (
+                      <div key={idx}>
+                        <h4 className="text-lg font-semibold mb-3 text-gradient-ai font-mono">
+                          {section.title}
+                        </h4>
+                        <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                          {section.content}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {/* Conclusion */}
+                    <div className="p-4 bg-gradient-ai/5 rounded-lg border border-primary/10">
+                      <h4 className="text-lg font-semibold mb-3 text-gradient-ai font-mono">
+                        Conclusión
+                      </h4>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {post.content.conclusion}
+                      </p>
+                    </div>
+                    
+                    {/* Tags */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 text-muted-foreground">TAGS</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.map((tag, idx) => (
+                          <span key={idx} className="px-3 py-1 bg-gradient-ai/10 text-primary rounded-full text-sm border border-primary/20 neural-pulse">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="flex justify-center pt-4">
+                      <Button variant="hero" size="lg" className="neural-pulse shadow-neural" onClick={scrollToContact}>
+                        <Brain className="mr-2 h-5 w-5" />
+                        ¿Te interesa implementar esto?
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
@@ -362,94 +419,6 @@ const Blog = () => {
             </Button>
           </div>
         </div>
-
-        {/* Blog Post Modal */}
-        <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-background to-background/95 backdrop-blur-xl border border-primary/20 ai-glow">
-            {selectedPost && (
-              
-                <>
-                  <DialogHeader>
-                    <div className="flex items-center gap-3 mb-4">
-                      <Badge className="bg-gradient-ai text-primary-foreground border-0">
-                        {getCategoryIcon(selectedPost.category)}
-                        <span className="ml-1">{selectedPost.category}</span>
-                      </Badge>
-                      <div className="flex items-center text-sm text-muted-foreground space-x-4">
-                        <span>{selectedPost.date}</span>
-                        <span>{selectedPost.readTime}</span>
-                      </div>
-                    </div>
-                    <DialogTitle className="text-2xl text-gradient-neural mb-2">
-                      {selectedPost.title}
-                    </DialogTitle>
-                    <DialogDescription className="text-base">
-                      Por {selectedPost.author}
-                    </DialogDescription>
-                  </DialogHeader>
-                  
-                  <div className="space-y-6 mt-6">
-                    {/* Hero Image */}
-                    <div className="relative overflow-hidden rounded-lg h-64">
-                      <img 
-                        src={selectedPost.image} 
-                        alt={selectedPost.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
-                    </div>
-                    
-                    {/* Introduction */}
-                    <p className="text-muted-foreground leading-relaxed text-lg">
-                      {selectedPost.content.introduction}
-                    </p>
-                    
-                    {/* Content Sections */}
-                    {selectedPost.content.sections.map((section, idx) => (
-                      <div key={idx}>
-                        <h4 className="text-lg font-semibold mb-3 text-gradient-ai font-mono">
-                          {section.title}
-                        </h4>
-                        <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                          {section.content}
-                        </div>
-                      </div>
-                    ))}
-                    
-                    {/* Conclusion */}
-                    <div className="p-6 bg-gradient-ai/5 rounded-lg border border-primary/10">
-                      <h4 className="text-lg font-semibold mb-3 text-gradient-ai font-mono">
-                        Conclusión
-                      </h4>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {selectedPost.content.conclusion}
-                      </p>
-                    </div>
-                    
-                    {/* Tags */}
-                    <div>
-                      <h4 className="text-sm font-semibold mb-3 text-muted-foreground">TAGS</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedPost.tags.map((tag, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-gradient-ai/10 text-primary rounded-full text-sm border border-primary/20 neural-pulse">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-center mt-8 pt-6 border-t">
-                    <Button variant="hero" size="lg" className="neural-pulse shadow-neural" onClick={scrollToContact}>
-                      <Brain className="mr-2 h-5 w-5" />
-                      ¿Te interesa implementar esto en tu empresa?
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </div>
-                </>
-            )}
-          </DialogContent>
-        </Dialog>
       </div>
     </section>
   );
