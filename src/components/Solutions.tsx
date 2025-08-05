@@ -165,7 +165,6 @@ const Solutions = () => {
                   ))}
                 </div>
                 
-                <Button variant="tech" className="w-full group">
                 <Button 
                   variant="tech" 
                   className="w-full group"
