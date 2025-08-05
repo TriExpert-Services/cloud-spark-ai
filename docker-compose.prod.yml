@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  triexpert-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NODE_ENV=production
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - ./logs:/var/log/nginx
+    networks:
+      - triexpert-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # Optional: Add a reverse proxy like Traefik or nginx-proxy
+  # traefik:
+  #   image: traefik:v2.10
+  #   command:
+  #     - "--api.insecure=true"
+  #     - "--providers.docker=true"
+  #     - "--providers.docker.exposedbydefault=false"
+  #     - "--entrypoints.web.address=:80"
+  #     - "--entrypoints.websecure.address=:443"
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     - "8080:8080"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   networks:
+  #     - triexpert-network
+
+networks:
+  triexpert-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local

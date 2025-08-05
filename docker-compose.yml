@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  triexpert-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      # Optional: Mount SSL certificates if using HTTPS
+      # - ./ssl:/etc/nginx/ssl:ro
+      # Optional: Mount custom nginx config
+      # - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - triexpert-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.triexpert.rule=Host(`triexpert.local`)"
+      - "traefik.http.routers.triexpert.entrypoints=web"
+      - "traefik.http.services.triexpert.loadbalancer.server.port=80"
+
+networks:
+  triexpert-network:
+    driver: bridge
+
+# Optional: Add volumes for persistent data if needed
+volumes:
+  ssl-certs:
+    driver: local
