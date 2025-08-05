@@ -1,32 +1,87 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, Bot, Workflow, Zap, Database, Shield, BarChart3 } from "lucide-react";
 import automationIcon from "@/assets/automation-icon.jpg";
 import aiIcon from "@/assets/ai-icon.jpg";
 import optimizationIcon from "@/assets/optimization-icon.jpg";
 
 const Services = () => {
+  const [selectedService, setSelectedService] = useState<number | null>(null);
+
   const services = [
     {
       icon: <Bot className="w-8 h-8 text-primary" />,
       image: aiIcon,
       title: "Automatización con IA",
       description: "Implementamos soluciones de inteligencia artificial para automatizar procesos complejos y toma de decisiones.",
-      features: ["Procesamiento de lenguaje natural", "Análisis predictivo", "Machine Learning personalizado"]
+      features: ["Procesamiento de lenguaje natural", "Análisis predictivo", "Machine Learning personalizado"],
+      detailedInfo: {
+        overview: "Nuestra solución de automatización con IA revoluciona la manera en que las empresas manejan procesos complejos, utilizando algoritmos avanzados para optimizar operaciones y reducir errores humanos.",
+        keyFeatures: [
+          "Procesamiento de Lenguaje Natural (NLP) para análisis de documentos",
+          "Análisis predictivo para anticipar tendencias de mercado",
+          "Machine Learning personalizado según las necesidades específicas",
+          "Automatización de procesos de decisión complejos",
+          "Integración con sistemas existentes sin interrupciones"
+        ],
+        benefits: [
+          "Reducción del 85% en errores de procesamiento",
+          "Ahorro de hasta 40 horas semanales por empleado",
+          "Mejora en la precisión de predicciones del 92%",
+          "ROI promedio del 300% en el primer año"
+        ],
+        industries: ["Finanzas", "Salud", "E-commerce", "Logística", "Manufactura"]
+      }
     },
     {
       icon: <Workflow className="w-8 h-8 text-primary" />,
       image: automationIcon,
       title: "Flujos de Trabajo n8n",
       description: "Creamos y optimizamos flujos de trabajo automatizados conectando todas tus herramientas empresariales.",
-      features: ["Integración de APIs", "Workflows personalizados", "Monitoreo en tiempo real"]
+      features: ["Integración de APIs", "Workflows personalizados", "Monitoreo en tiempo real"],
+      detailedInfo: {
+        overview: "Diseñamos y desarrollamos flujos de trabajo automatizados con n8n que conectan perfectamente todas tus herramientas empresariales, eliminando tareas repetitivas y mejorando la eficiencia operativa.",
+        keyFeatures: [
+          "Integración de más de 400 aplicaciones diferentes",
+          "Workflows personalizados según procesos específicos",
+          "Monitoreo en tiempo real con alertas automáticas",
+          "Interfaz visual intuitiva para modificaciones futuras",
+          "Escalabilidad automática según demanda"
+        ],
+        benefits: [
+          "Reducción del 70% en tareas manuales repetitivas",
+          "Sincronización automática de datos entre sistemas",
+          "Notificaciones instantáneas ante eventos críticos",
+          "Reducción de errores de transferencia de datos del 95%"
+        ],
+        industries: ["Marketing Digital", "Ventas", "Atención al Cliente", "Recursos Humanos", "Contabilidad"]
+      }
     },
     {
       icon: <BarChart3 className="w-8 h-8 text-primary" />,
       image: optimizationIcon,
       title: "Optimización de Procesos",
       description: "Analizamos y mejoramos tus procesos existentes para maximizar la eficiencia y reducir costos.",
-      features: ["Análisis de procesos", "Mejora continua", "ROI garantizado"]
+      features: ["Análisis de procesos", "Mejora continua", "ROI garantizado"],
+      detailedInfo: {
+        overview: "Realizamos un análisis exhaustivo de tus procesos empresariales actuales, identificando cuellos de botella y oportunidades de mejora para implementar soluciones que maximicen la eficiencia operativa.",
+        keyFeatures: [
+          "Auditoría completa de procesos existentes",
+          "Mapeo de flujos de trabajo y identificación de ineficiencias",
+          "Implementación de mejoras con metodologías ágiles",
+          "Sistema de monitoreo continuo para mejora constante",
+          "Capacitación del equipo en nuevos procesos optimizados"
+        ],
+        benefits: [
+          "Reducción promedio del 60% en tiempo de procesamiento",
+          "Eliminación de hasta 80% de pasos innecesarios",
+          "Mejora en satisfacción del cliente del 45%",
+          "ROI garantizado del 250% en los primeros 12 meses"
+        ],
+        industries: ["Servicios Profesionales", "Retail", "Hospitality", "Educación", "Gobierno"]
+      }
     }
   ];
 
@@ -85,6 +140,11 @@ const Services = () => {
                   ))}
                 </ul>
                 <Button variant="outline" className="w-full group">
+                <Button 
+                  variant="outline" 
+                  className="w-full group"
+                  onClick={() => setSelectedService(index)}
+                >
                   Saber más
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -115,6 +175,69 @@ const Services = () => {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
+
+        {/* Service Detail Modal */}
+        <Dialog open={selectedService !== null} onOpenChange={() => setSelectedService(null)}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            {selectedService !== null && (
+              <>
+                <DialogHeader>
+                  <DialogTitle className="text-2xl flex items-center gap-3">
+                    {services[selectedService].icon}
+                    {services[selectedService].title}
+                  </DialogTitle>
+                  <DialogDescription className="text-base">
+                    {services[selectedService].detailedInfo.overview}
+                  </DialogDescription>
+                </DialogHeader>
+                
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-primary">Características Principales</h4>
+                    <ul className="space-y-2">
+                      {services[selectedService].detailedInfo.keyFeatures.map((feature, idx) => (
+                        <li key={idx} className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-sm text-muted-foreground">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-primary">Beneficios Clave</h4>
+                    <ul className="space-y-2">
+                      {services[selectedService].detailedInfo.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start space-x-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-sm text-muted-foreground">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="mt-6">
+                  <h4 className="text-lg font-semibold mb-3 text-primary">Industrias Atendidas</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {services[selectedService].detailedInfo.industries.map((industry, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                        {industry}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="flex justify-center mt-8">
+                  <Button variant="hero" size="lg">
+                    Solicitar Consulta Personalizada
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
