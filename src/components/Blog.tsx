@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, ArrowRight, Brain, Cpu, Zap, TrendingUp } from "lucide-react";
 
 const Blog = () => {
-  const [selectedPost, setSelectedPost] = useState<number | null>(null);
+  const [selectedPost, setSelectedPost] = useState<any>(null);
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contacto');
@@ -327,7 +327,10 @@ const Blog = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => setSelectedPost(post.id)}
+                    onClick={() => {
+                      console.log('Opening post:', post.id);
+                      setSelectedPost(post);
+                    }}
                     className="group/btn hover:bg-gradient-ai/10"
                   >
                     Leer más
@@ -361,30 +364,27 @@ const Blog = () => {
         </div>
 
         {/* Blog Post Modal */}
-        <Dialog open={selectedPost !== null} onOpenChange={() => setSelectedPost(null)}>
+        <Dialog open={!!selectedPost} onOpenChange={() => setSelectedPost(null)}>
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-background to-background/95 backdrop-blur-xl border border-primary/20 ai-glow">
-            {selectedPost !== null && (() => {
-              const post = blogPosts.find(p => p.id === selectedPost);
-              if (!post) return null;
+            {selectedPost && (
               
-              return (
                 <>
                   <DialogHeader>
                     <div className="flex items-center gap-3 mb-4">
                       <Badge className="bg-gradient-ai text-primary-foreground border-0">
-                        {getCategoryIcon(post.category)}
-                        <span className="ml-1">{post.category}</span>
+                        {getCategoryIcon(selectedPost.category)}
+                        <span className="ml-1">{selectedPost.category}</span>
                       </Badge>
                       <div className="flex items-center text-sm text-muted-foreground space-x-4">
-                        <span>{post.date}</span>
-                        <span>{post.readTime}</span>
+                        <span>{selectedPost.date}</span>
+                        <span>{selectedPost.readTime}</span>
                       </div>
                     </div>
                     <DialogTitle className="text-2xl text-gradient-neural mb-2">
-                      {post.title}
+                      {selectedPost.title}
                     </DialogTitle>
                     <DialogDescription className="text-base">
-                      Por {post.author}
+                      Por {selectedPost.author}
                     </DialogDescription>
                   </DialogHeader>
                   
@@ -392,8 +392,8 @@ const Blog = () => {
                     {/* Hero Image */}
                     <div className="relative overflow-hidden rounded-lg h-64">
                       <img 
-                        src={post.image} 
-                        alt={post.title}
+                        src={selectedPost.image} 
+                        alt={selectedPost.title}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
@@ -401,11 +401,11 @@ const Blog = () => {
                     
                     {/* Introduction */}
                     <p className="text-muted-foreground leading-relaxed text-lg">
-                      {post.content.introduction}
+                      {selectedPost.content.introduction}
                     </p>
                     
                     {/* Content Sections */}
-                    {post.content.sections.map((section, idx) => (
+                    {selectedPost.content.sections.map((section, idx) => (
                       <div key={idx}>
                         <h4 className="text-lg font-semibold mb-3 text-gradient-ai font-mono">
                           {section.title}
@@ -422,7 +422,7 @@ const Blog = () => {
                         Conclusión
                       </h4>
                       <p className="text-muted-foreground leading-relaxed">
-                        {post.content.conclusion}
+                        {selectedPost.content.conclusion}
                       </p>
                     </div>
                     
@@ -430,7 +430,7 @@ const Blog = () => {
                     <div>
                       <h4 className="text-sm font-semibold mb-3 text-muted-foreground">TAGS</h4>
                       <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag, idx) => (
+                        {selectedPost.tags.map((tag, idx) => (
                           <span key={idx} className="px-3 py-1 bg-gradient-ai/10 text-primary rounded-full text-sm border border-primary/20 neural-pulse">
                             {tag}
                           </span>
@@ -447,8 +447,7 @@ const Blog = () => {
                     </Button>
                   </div>
                 </>
-              );
-            })()}
+            )}
           </DialogContent>
         </Dialog>
       </div>
