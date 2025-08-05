@@ -1,27 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
-    console.log('Navigating to section:', sectionId); // Debug log
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    } else {
-      console.error('Section not found:', sectionId); // Debug log
-    }
-    setIsMenuOpen(false); // Close mobile menu after navigation
-  };
-
-  // Handle navigation links
-  const handleNavClick = (sectionId: string) => {
-    scrollToSection(sectionId);
+  // Simple and direct navigation function
+  const navigateToSection = (sectionId: string) => {
+    // Close mobile menu immediately
+    setIsMenuOpen(false);
+    
+    // Add small delay to ensure DOM is ready
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        // Fallback: try to scroll to top if section not found
+        if (sectionId === 'inicio') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+    }, 50);
   };
 
   return (
@@ -32,7 +35,10 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-tech bg-clip-text text-transparent">
+            <h1 
+              className="text-2xl font-bold bg-gradient-tech bg-clip-text text-transparent cursor-pointer"
+              onClick={() => navigateToSection('inicio')}
+            >
               TriExpert Services AI
             </h1>
           </div>
@@ -41,32 +47,32 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <button 
-                onClick={() => handleNavClick('inicio')} 
+                onClick={() => navigateToSection('inicio')} 
                 className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Inicio
               </button>
               <button 
-                onClick={() => handleNavClick('servicios')} 
+                onClick={() => navigateToSection('servicios')} 
                 className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Servicios
               </button>
               <button 
-                onClick={() => handleNavClick('soluciones')} 
+                onClick={() => navigateToSection('soluciones')} 
                 className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Soluciones
               </button>
               <button 
-                onClick={() => handleNavClick('blog')} 
+                onClick={() => navigateToSection('blog')} 
                 className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer font-medium"
               >
                 Blog
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               </button>
               <button 
-                onClick={() => handleNavClick('contacto')} 
+                onClick={() => navigateToSection('contacto')} 
                 className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Contacto
@@ -79,7 +85,7 @@ const Navbar = () => {
             <Button 
               variant="hero" 
               size="sm" 
-              onClick={() => handleNavClick('contacto')}
+              onClick={() => navigateToSection('contacto')}
             >
               Consulta Gratuita
             </Button>
@@ -102,31 +108,31 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
               <button 
-                onClick={() => handleNavClick('inicio')} 
+                onClick={() => navigateToSection('inicio')} 
                 className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Inicio
               </button>
               <button 
-                onClick={() => handleNavClick('servicios')} 
+                onClick={() => navigateToSection('servicios')} 
                 className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Servicios
               </button>
               <button 
-                onClick={() => handleNavClick('soluciones')} 
+                onClick={() => navigateToSection('soluciones')} 
                 className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Soluciones
               </button>
               <button 
-                onClick={() => handleNavClick('blog')} 
+                onClick={() => navigateToSection('blog')} 
                 className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Blog
               </button>
               <button 
-                onClick={() => handleNavClick('contacto')} 
+                onClick={() => navigateToSection('contacto')} 
                 className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Contacto
@@ -136,7 +142,7 @@ const Navbar = () => {
                   variant="hero" 
                   size="sm" 
                   className="w-full" 
-                  onClick={() => handleNavClick('contacto')}
+                  onClick={() => navigateToSection('contacto')}
                 >
                   Consulta Gratuita
                 </Button>
