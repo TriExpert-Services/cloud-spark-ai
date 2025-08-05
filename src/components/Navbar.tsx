@@ -12,6 +12,12 @@ const Navbar = () => {
     }
   };
   return (
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50 transition-all duration-300">
       {/* Neural grid background */}
       <div className="absolute inset-0 bg-neural-grid opacity-5"></div>
@@ -27,22 +33,22 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <a href="#inicio" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              <button onClick={() => scrollToSection('inicio')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Inicio
-              </a>
-              <a href="#servicios" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              </button>
+              <button onClick={() => scrollToSection('servicios')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Servicios
-              </a>
-              <a href="#soluciones" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              </button>
+              <button onClick={() => scrollToSection('soluciones')} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Soluciones
-              </a>
-              <a href="#contacto" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
+              </button>
+              <button onClick={() => scrollToContact()} className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Contacto
-              </a>
-              <a href="#blog" className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer">
+              </button>
+              <button onClick={() => scrollToSection('blog')} className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer">
                 Blog
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -69,21 +75,21 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
-              <a href="#inicio" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
+              <button onClick={() => { scrollToSection('inicio'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
                 Inicio
-              </a>
-              <a href="#servicios" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
+              </button>
+              <button onClick={() => { scrollToSection('servicios'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
                 Servicios
-              </a>
-              <a href="#soluciones" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
+              </button>
+              <button onClick={() => { scrollToSection('soluciones'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
                 Soluciones
-              </a>
-              <a href="#blog" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
+              </button>
+              <button onClick={() => { scrollToSection('blog'); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
                 Blog
-              </a>
-              <a href="#contacto" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
+              </button>
+              <button onClick={() => { scrollToContact(); setIsMenuOpen(false); }} className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left">
                 Contacto
-              </a>
+              </button>
               <div className="pt-2">
                 <Button variant="hero" size="sm" className="w-full" onClick={scrollToContact}>
                   Consulta Gratuita
