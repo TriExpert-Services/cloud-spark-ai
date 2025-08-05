@@ -10,13 +10,30 @@ const Hero = () => {
     }
   };
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-neural-grid">
+    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-hero matrix-rain"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90"></div>
+      </div>
+      
+      {/* Neural Network Grid Background */}
+      <div className="absolute inset-0 bg-neural-grid opacity-20"></div>
+      
+      {/* Subtle Tech Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="tech-grid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <circle cx="50" cy="50" r="2" fill="hsl(220 70% 45%)" opacity="0.5" />
+              <line x1="50" y1="0" x2="50" y2="100" stroke="hsl(220 70% 45%)" strokeWidth="0.5" opacity="0.3" />
+              <line x1="0" y1="50" x2="100" y2="50" stroke="hsl(220 70% 45%)" strokeWidth="0.5" opacity="0.3" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#tech-grid)" />
+        </svg>
       </div>
 
       {/* Neural Network Background Effect */}

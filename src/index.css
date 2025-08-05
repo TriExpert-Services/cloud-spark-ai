@@ -10,24 +10,24 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 27% 4%;
+    --foreground: 220 14% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 20% 8%;
+    --card-foreground: 220 14% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 220 14% 96%;
 
     --primary: 220 100% 55%;
     --primary-foreground: 0 0% 100%;
     --primary-glow: 220 100% 65%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 40% 20%;
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 220 14% 96%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 20% 50%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 14% 70%;
 
     --accent: 280 100% 65%;
     --accent-foreground: 0 0% 100%;
@@ -35,23 +35,23 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 14% 91%;
-    --input: 220 14% 91%;
+    --border: 220 15% 15%;
+    --input: 220 15% 12%;
     --ring: 220 100% 50%;
 
     /* Tech gradient system */
-    --gradient-tech: linear-gradient(135deg, hsl(220 100% 55%), hsl(280 100% 65%), hsl(300 100% 60%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 100% 55% / 0.95), hsl(280 100% 65% / 0.95), hsl(300 100% 60% / 0.9));
-    --gradient-subtle: linear-gradient(180deg, hsl(220 14% 98%), hsl(220 14% 96%));
-    --gradient-ai: linear-gradient(45deg, hsl(195 100% 50%), hsl(220 100% 55%), hsl(280 100% 65%));
-    --gradient-neural: conic-gradient(from 0deg, hsl(220 100% 55%), hsl(280 100% 65%), hsl(300 100% 60%), hsl(320 100% 55%), hsl(220 100% 55%));
+    --gradient-tech: linear-gradient(135deg, hsl(220 70% 25%), hsl(220 80% 35%), hsl(240 60% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 50% 8% / 0.95), hsl(220 40% 12% / 0.9), hsl(240 30% 15% / 0.85));
+    --gradient-subtle: linear-gradient(180deg, hsl(220 25% 6%), hsl(220 20% 8%));
+    --gradient-ai: linear-gradient(45deg, hsl(195 80% 40%), hsl(220 70% 45%), hsl(240 60% 50%));
+    --gradient-neural: conic-gradient(from 0deg, hsl(220 70% 35%), hsl(240 60% 40%), hsl(260 50% 35%), hsl(280 60% 40%), hsl(220 70% 35%));
     --gradient-matrix: linear-gradient(90deg, hsl(120 100% 25%), hsl(120 100% 35%), hsl(120 100% 45%));
     
     /* Shadows with tech colors */
-    --shadow-tech: 0 10px 30px -10px hsl(220 100% 55% / 0.4), 0 0 20px hsl(280 100% 65% / 0.2);
-    --shadow-glow: 0 0 40px hsl(220 100% 65% / 0.5), 0 0 80px hsl(280 100% 65% / 0.3);
-    --shadow-card: 0 4px 20px -2px hsl(220 40% 20% / 0.1);
-    --shadow-neural: 0 0 50px hsl(220 100% 55% / 0.3), 0 0 100px hsl(280 100% 65% / 0.2), inset 0 0 20px hsl(220 100% 55% / 0.1);
+    --shadow-tech: 0 10px 30px -10px hsl(220 70% 35% / 0.3), 0 0 20px hsl(240 60% 40% / 0.15);
+    --shadow-glow: 0 0 40px hsl(220 70% 45% / 0.3), 0 0 80px hsl(240 60% 40% / 0.2);
+    --shadow-card: 0 4px 20px -2px hsl(220 40% 20% / 0.3);
+    --shadow-neural: 0 0 50px hsl(220 70% 35% / 0.2), 0 0 100px hsl(240 60% 40% / 0.15), inset 0 0 20px hsl(220 70% 35% / 0.05);
 
     /* Animation properties */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -60,19 +60,19 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 220 25% 6%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 220 14% 96%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 220 70% 45%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 220 25% 6%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 220 15% 12%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 220 14% 96%;
 
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 220 15% 15%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }

@@ -129,9 +129,9 @@ const Solutions = () => {
   ];
 
   return (
-    <section id="soluciones" className="py-20 bg-background relative overflow-hidden">
+    <section id="soluciones" className="py-20 bg-gradient-subtle relative overflow-hidden">
       {/* Neural network background */}
-      <div className="absolute inset-0 bg-neural-grid opacity-30"></div>
+      <div className="absolute inset-0 bg-neural-grid opacity-10"></div>
       
       {/* Floating tech elements */}
       <div className="absolute top-20 right-10 w-32 h-32 bg-gradient-ai opacity-10 rounded-full animate-float blur-xl"></div>

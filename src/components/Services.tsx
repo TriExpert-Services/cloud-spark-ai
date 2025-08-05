@@ -112,7 +112,7 @@ const Services = () => {
   return (
     <section id="servicios" className="py-20 bg-gradient-subtle relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-neural-grid opacity-50"></div>
+      <div className="absolute inset-0 bg-neural-grid opacity-10"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
