@@ -139,7 +139,6 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <Button variant="outline" className="w-full group">
                 <Button 
                   variant="outline" 
                   className="w-full group"
