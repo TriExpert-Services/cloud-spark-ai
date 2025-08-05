@@ -39,6 +39,10 @@ const Navbar = () => {
               <a href="#contacto" className="text-foreground hover:text-primary transition-colors px-3 py-2">
                 Contacto
               </a>
+              <a href="#blog" className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group">
+                Blog
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              </a>
             </div>
           </div>
 
@@ -73,6 +77,9 @@ const Navbar = () => {
               </a>
               <a href="#soluciones" className="block px-3 py-2 text-foreground hover:text-primary">
                 Soluciones
+              </a>
+              <a href="#blog" className="block px-3 py-2 text-foreground hover:text-primary">
+                Blog
               </a>
               <a href="#contacto" className="block px-3 py-2 text-foreground hover:text-primary">
                 Contacto
