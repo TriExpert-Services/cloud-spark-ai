@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import { supabase } from "@/lib/supabase";
+import type { Contact } from "@/lib/supabase";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +40,17 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/webhook/n8n', {
+      // Guardar en Supabase
+      const { data, error } = await supabase
+        .from('contacts')
+        .insert([formData as Contact]);
+
+      if (error) {
+        throw error;
+      }
+
+      // También enviar a n8n webhook como backup
+      const webhookResponse = await fetch('/api/webhook/n8n', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -48,32 +60,26 @@ const Contact = () => {
         body: JSON.stringify({
           tipo: 'consulta_contacto',
           timestamp: new Date().toISOString(),
-          datos: formData
+          datos: formData,
+          supabase_id: data?.[0]?.id
         })
       });
 
-      if (response.ok) {
-        toast.success("¡Solicitud enviada correctamente! Nos pondremos en contacto contigo pronto.");
-        // Limpiar formulario
-        setFormData({
-          nombre: '',
-          empresa: '',
-          email: '',
-          telefono: '',
-          sector: '',
-          mensaje: ''
-        });
-      } else {
-        const errorText = await response.text();
-        throw new Error(`Error ${response.status}: ${errorText || 'Error en el envío'}`);
-      }
+      toast.success("¡Solicitud enviada correctamente! Nos pondremos en contacto contigo pronto.");
+      
+      // Limpiar formulario
+      setFormData({
+        nombre: '',
+        empresa: '',
+        email: '',
+        telefono: '',
+        sector: '',
+        mensaje: ''
+      });
+      
     } catch (error) {
       console.error('Error al enviar formulario:', error);
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        toast.error("Error de conexión. Verifica tu conexión a internet o inténtalo más tarde.");
-      } else {
-        toast.error(`Hubo un error al enviar tu solicitud: ${error.message}`);
-      }
+      toast.error(`Hubo un error al enviar tu solicitud: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
