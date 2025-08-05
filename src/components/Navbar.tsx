@@ -11,13 +11,14 @@ const Navbar = () => {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  return (
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  return (
     <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50 transition-all duration-300">
       {/* Neural grid background */}
       <div className="absolute inset-0 bg-neural-grid opacity-5"></div>
