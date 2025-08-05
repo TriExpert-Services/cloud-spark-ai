@@ -56,7 +56,7 @@ const Footer = () => {
 
         <div className="border-t border-white/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-blue-100 text-sm">
-            © 2024 TriExpert Services AI. Todos los derechos reservados.
+            © {new Date().getFullYear()} TriExpert Services AI. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-blue-100 hover:text-white text-sm transition-colors">Política de Privacidad</a>
