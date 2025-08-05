@@ -113,7 +113,12 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 3s ease-in-out infinite',
-				'pulse-glow': 'pulse-glow 2s ease-in-out infinite'
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'gradient-shift': 'gradient-shift 6s ease-in-out infinite',
+				'neural-pulse': 'neural-pulse 3s ease-in-out infinite',
+				'matrix-scroll': 'matrix-scroll 20s linear infinite',
+				'data-flow': 'data-flow 2s ease-in-out infinite',
+				'circuit-glow': 'circuit-glow 2s ease-in-out infinite'
 			}
 		}
 	},

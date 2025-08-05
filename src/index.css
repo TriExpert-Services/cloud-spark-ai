@@ -5,6 +5,8 @@
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
+/* Import futuristic font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
@@ -17,9 +19,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 220 100% 50%;
+    --primary: 220 100% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 220 100% 60%;
+    --primary-glow: 220 100% 65%;
 
     --secondary: 220 14% 96%;
     --secondary-foreground: 220 40% 20%;
@@ -27,7 +29,7 @@ All colors MUST be HSL.
     --muted: 220 14% 96%;
     --muted-foreground: 220 20% 50%;
 
-    --accent: 280 100% 70%;
+    --accent: 280 100% 65%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -38,18 +40,23 @@ All colors MUST be HSL.
     --ring: 220 100% 50%;
 
     /* Tech gradient system */
-    --gradient-tech: linear-gradient(135deg, hsl(220 100% 50%), hsl(280 100% 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 100% 50% / 0.95), hsl(280 100% 70% / 0.95));
+    --gradient-tech: linear-gradient(135deg, hsl(220 100% 55%), hsl(280 100% 65%), hsl(300 100% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 100% 55% / 0.95), hsl(280 100% 65% / 0.95), hsl(300 100% 60% / 0.9));
     --gradient-subtle: linear-gradient(180deg, hsl(220 14% 98%), hsl(220 14% 96%));
+    --gradient-ai: linear-gradient(45deg, hsl(195 100% 50%), hsl(220 100% 55%), hsl(280 100% 65%));
+    --gradient-neural: conic-gradient(from 0deg, hsl(220 100% 55%), hsl(280 100% 65%), hsl(300 100% 60%), hsl(320 100% 55%), hsl(220 100% 55%));
+    --gradient-matrix: linear-gradient(90deg, hsl(120 100% 25%), hsl(120 100% 35%), hsl(120 100% 45%));
     
     /* Shadows with tech colors */
-    --shadow-tech: 0 10px 30px -10px hsl(220 100% 50% / 0.3);
-    --shadow-glow: 0 0 40px hsl(220 100% 60% / 0.4);
+    --shadow-tech: 0 10px 30px -10px hsl(220 100% 55% / 0.4), 0 0 20px hsl(280 100% 65% / 0.2);
+    --shadow-glow: 0 0 40px hsl(220 100% 65% / 0.5), 0 0 80px hsl(280 100% 65% / 0.3);
     --shadow-card: 0 4px 20px -2px hsl(220 40% 20% / 0.1);
+    --shadow-neural: 0 0 50px hsl(220 100% 55% / 0.3), 0 0 100px hsl(280 100% 65% / 0.2), inset 0 0 20px hsl(220 100% 55% / 0.1);
 
     /* Animation properties */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-neural: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 
@@ -116,5 +123,137 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* AI and Tech themed utilities */
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  .text-gradient-ai {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-neural {
+    background: var(--gradient-neural);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400% 400%;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .bg-neural-grid {
+    background-image: 
+      radial-gradient(circle at 25px 25px, hsl(220 100% 55% / 0.1) 2px, transparent 0),
+      radial-gradient(circle at 75px 75px, hsl(280 100% 65% / 0.1) 2px, transparent 0);
+    background-size: 100px 100px;
+  }
+
+  .ai-glow {
+    position: relative;
+  }
+
+  .ai-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: var(--gradient-ai);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    opacity: 0.6;
+  }
+
+  .neural-pulse {
+    animation: neural-pulse 3s ease-in-out infinite;
+  }
+
+  .matrix-rain {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .matrix-rain::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    right: 0;
+    height: 200%;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 98px,
+      hsl(120 100% 35% / 0.03) 100px
+    );
+    animation: matrix-scroll 20s linear infinite;
+  }
+}
+@layer utilities {
+  .bg-gradient-ai {
+    background: var(--gradient-ai);
+  }
+
+  .bg-gradient-neural {
+    background: var(--gradient-neural);
+    background-size: 400% 400%;
+    animation: gradient-shift 6s ease-in-out infinite;
+  }
+
+  .shadow-neural {
+    box-shadow: var(--shadow-neural);
+  }
+
+  .transition-neural {
+    transition: var(--transition-neural);
+  }
+
+  /* Enhanced animations */
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes neural-pulse {
+    0%, 100% { 
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes matrix-scroll {
+    0% { transform: translateX(-100px); }
+    100% { transform: translateX(100px); }
+  }
+
+  @keyframes data-flow {
+    0% { transform: translateX(-100%) scaleX(0); }
+    50% { transform: translateX(0%) scaleX(1); }
+    100% { transform: translateX(100%) scaleX(0); }
+  }
+
+  @keyframes circuit-glow {
+    0%, 100% { 
+      box-shadow: 0 0 5px hsl(220 100% 55% / 0.5);
+    }
+    50% { 
+      box-shadow: 0 0 20px hsl(220 100% 55% / 0.8), 0 0 40px hsl(280 100% 65% / 0.4);
+    }
+  }
+
+  .data-flow {
+    animation: data-flow 2s ease-in-out infinite;
+  }
+
+  .circuit-glow {
+    animation: circuit-glow 2s ease-in-out infinite;
   }
 }
