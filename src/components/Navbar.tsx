@@ -5,6 +5,12 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +42,7 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="sm">
+            <Button variant="hero" size="sm" onClick={scrollToContact}>
               Consulta Gratuita
             </Button>
           </div>
@@ -70,7 +76,7 @@ const Navbar = () => {
                 Contacto
               </a>
               <div className="pt-2">
-                <Button variant="hero" size="sm" className="w-full">
+                <Button variant="hero" size="sm" className="w-full" onClick={scrollToContact}>
                   Consulta Gratuita
                 </Button>
               </div>

@@ -10,6 +10,12 @@ import optimizationIcon from "@/assets/optimization-icon.jpg";
 const Services = () => {
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const services = [
     {
       icon: <Bot className="w-8 h-8 text-primary" />,
@@ -169,7 +175,7 @@ const Services = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <Button variant="hero" size="xl">
+          <Button variant="hero" size="xl" onClick={scrollToContact}>
             Solicita tu Consulta Gratuita
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -228,7 +234,7 @@ const Services = () => {
                 </div>
                 
                 <div className="flex justify-center mt-8">
-                  <Button variant="hero" size="lg">
+                  <Button variant="hero" size="lg" onClick={scrollToContact}>
                     Solicitar Consulta Personalizada
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>

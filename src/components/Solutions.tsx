@@ -7,6 +7,12 @@ import { CheckCircle, ArrowRight, Factory, ShoppingCart, HeartHandshake, Briefca
 const Solutions = () => {
   const [selectedCase, setSelectedCase] = useState<number | null>(null);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const solutions = [
     {
       icon: <Factory className="w-8 h-8 text-primary" />,
@@ -209,7 +215,7 @@ const Solutions = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <Button variant="hero" size="xl">
+          <Button variant="hero" size="xl" onClick={scrollToContact}>
             Agenda tu Consulta Estratégica
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -274,7 +280,7 @@ const Solutions = () => {
                 </div>
                 
                 <div className="flex justify-center mt-8 pt-6 border-t">
-                  <Button variant="hero" size="lg">
+                  <Button variant="hero" size="lg" onClick={scrollToContact}>
                     Solicitar Caso Similar para tu Empresa
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
