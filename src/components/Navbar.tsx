@@ -6,11 +6,22 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
+    console.log('Navigating to section:', sectionId); // Debug log
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    } else {
+      console.error('Section not found:', sectionId); // Debug log
     }
     setIsMenuOpen(false); // Close mobile menu after navigation
+  };
+
+  // Handle navigation links
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId);
   };
 
   return (
@@ -30,33 +41,33 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <button 
-                onClick={() => scrollToSection('inicio')} 
-                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+                onClick={() => handleNavClick('inicio')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Inicio
               </button>
               <button 
-                onClick={() => scrollToSection('servicios')} 
-                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+                onClick={() => handleNavClick('servicios')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Servicios
               </button>
               <button 
-                onClick={() => scrollToSection('soluciones')} 
-                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+                onClick={() => handleNavClick('soluciones')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Soluciones
               </button>
               <button 
-                onClick={() => scrollToSection('blog')} 
-                className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer"
+                onClick={() => handleNavClick('blog')} 
+                className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer font-medium"
               >
                 Blog
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               </button>
               <button 
-                onClick={() => scrollToSection('contacto')} 
-                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer"
+                onClick={() => handleNavClick('contacto')} 
+                className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer font-medium"
               >
                 Contacto
               </button>
@@ -65,7 +76,11 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="sm" onClick={() => scrollToSection('contacto')}>
+            <Button 
+              variant="hero" 
+              size="sm" 
+              onClick={() => handleNavClick('contacto')}
+            >
               Consulta Gratuita
             </Button>
           </div>
@@ -87,37 +102,42 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
               <button 
-                onClick={() => scrollToSection('inicio')} 
-                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+                onClick={() => handleNavClick('inicio')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Inicio
               </button>
               <button 
-                onClick={() => scrollToSection('servicios')} 
-                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+                onClick={() => handleNavClick('servicios')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Servicios
               </button>
               <button 
-                onClick={() => scrollToSection('soluciones')} 
-                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+                onClick={() => handleNavClick('soluciones')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Soluciones
               </button>
               <button 
-                onClick={() => scrollToSection('blog')} 
-                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+                onClick={() => handleNavClick('blog')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Blog
               </button>
               <button 
-                onClick={() => scrollToSection('contacto')} 
-                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left"
+                onClick={() => handleNavClick('contacto')} 
+                className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer w-full text-left font-medium"
               >
                 Contacto
               </button>
               <div className="pt-2">
-                <Button variant="hero" size="sm" className="w-full" onClick={() => scrollToSection('contacto')}>
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  className="w-full" 
+                  onClick={() => handleNavClick('contacto')}
+                >
                   Consulta Gratuita
                 </Button>
               </div>
