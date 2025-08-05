@@ -40,8 +40,10 @@ const Contact = () => {
     try {
       const response = await fetch('https://app.n8n-tech.cloud/webhook/n8n', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           tipo: 'consulta_contacto',
@@ -62,11 +64,16 @@ const Contact = () => {
           mensaje: ''
         });
       } else {
-        throw new Error('Error en el envío');
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${errorText || 'Error en el envío'}`);
       }
     } catch (error) {
       console.error('Error al enviar formulario:', error);
-      toast.error("Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.");
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        toast.error("Error de conexión. Verifica tu conexión a internet o inténtalo más tarde.");
+      } else {
+        toast.error(`Hubo un error al enviar tu solicitud: ${error.message}`);
+      }
     } finally {
       setIsSubmitting(false);
     }
