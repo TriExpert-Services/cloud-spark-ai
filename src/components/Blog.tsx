@@ -235,6 +235,7 @@ const Blog = () => {
   };
 
   const togglePost = (postId: number) => {
+    console.log('Toggling post:', postId, 'Current expanded:', expandedPost);
     setExpandedPost(expandedPost === postId ? null : postId);
   };
 
@@ -330,7 +331,11 @@ const Blog = () => {
                   <Button 
                     variant="ghost" 
                     size="sm"
-                    onClick={() => togglePost(post.id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      togglePost(post.id);
+                    }}
                     className="group/btn hover:bg-gradient-ai/10"
                   >
                     {expandedPost === post.id ? 'Ocultar' : 'Leer más'}
@@ -344,7 +349,7 @@ const Blog = () => {
 
                 {/* Expanded Content */}
                 {expandedPost === post.id && (
-                  <div className="mt-6 pt-6 border-t border-border space-y-6 animate-in slide-in-from-top-2 duration-300">
+                  <div className="mt-6 pt-6 border-t border-border space-y-6">
                     {/* Introduction */}
                     <p className="text-muted-foreground leading-relaxed text-base">
                       {post.content.introduction}

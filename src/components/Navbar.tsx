@@ -27,19 +27,19 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <a href="#inicio" className="text-foreground hover:text-primary transition-colors px-3 py-2">
+              <a href="#inicio" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Inicio
               </a>
-              <a href="#servicios" className="text-foreground hover:text-primary transition-colors px-3 py-2">
+              <a href="#servicios" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Servicios
               </a>
-              <a href="#soluciones" className="text-foreground hover:text-primary transition-colors px-3 py-2">
+              <a href="#soluciones" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Soluciones
               </a>
-              <a href="#contacto" className="text-foreground hover:text-primary transition-colors px-3 py-2">
+              <a href="#contacto" className="text-foreground hover:text-primary transition-colors px-3 py-2 cursor-pointer">
                 Contacto
               </a>
-              <a href="#blog" className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group">
+              <a href="#blog" className="relative text-foreground hover:text-primary transition-colors px-3 py-2 group cursor-pointer">
                 Blog
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-ai transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
               </a>
@@ -69,19 +69,19 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
-              <a href="#inicio" className="block px-3 py-2 text-foreground hover:text-primary">
+              <a href="#inicio" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
                 Inicio
               </a>
-              <a href="#servicios" className="block px-3 py-2 text-foreground hover:text-primary">
+              <a href="#servicios" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
                 Servicios
               </a>
-              <a href="#soluciones" className="block px-3 py-2 text-foreground hover:text-primary">
+              <a href="#soluciones" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
                 Soluciones
               </a>
-              <a href="#blog" className="block px-3 py-2 text-foreground hover:text-primary">
+              <a href="#blog" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
                 Blog
               </a>
-              <a href="#contacto" className="block px-3 py-2 text-foreground hover:text-primary">
+              <a href="#contacto" className="block px-3 py-2 text-foreground hover:text-primary cursor-pointer" onClick={() => setIsMenuOpen(false)}>
                 Contacto
               </a>
               <div className="pt-2">
