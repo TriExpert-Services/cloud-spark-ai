@@ -28,16 +28,19 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Add non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nextjs -u 1001
+    adduser -S nextjs -u 1001 && \
+    mkdir -p /var/log/nginx /var/cache/nginx/client_temp && \
+    touch /var/log/nginx/access.log /var/log/nginx/error.log
 
 # Change ownership of nginx directories
 RUN chown -R nextjs:nodejs /usr/share/nginx/html && \
     chown -R nextjs:nodejs /var/cache/nginx && \
     chown -R nextjs:nodejs /var/log/nginx && \
-    chown -R nextjs:nodejs /etc/nginx/conf.d
+    chown -R nextjs:nodejs /etc/nginx/conf.d && \
+    chmod -R 755 /var/log/nginx /var/cache/nginx
 
-# Switch to non-root user
-USER nextjs
+# Don't switch to non-root user for nginx to work properly
+# USER nextjs
 
 # Expose port
 EXPOSE 80
