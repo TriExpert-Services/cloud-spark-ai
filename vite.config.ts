@@ -17,24 +17,22 @@ export default defineConfig(async ({ mode }) => {
   }
 
   return {
-  }
-  server: {
-    host: "::",
-    port: 8080,
-    proxy: {
-      '/api': {
-        target: 'https://app.n8n-tech.cloud',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+    server: {
+      host: "::",
+      port: 8080,
+      proxy: {
+        '/api': {
+          target: 'https://app.n8n-tech.cloud',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
       },
     },
-  },
-  plugins,
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    plugins,
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
-  },
-
-}
-)
+  };
+});
