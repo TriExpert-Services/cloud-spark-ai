@@ -69,7 +69,7 @@ const ChatBot = () => {
             {!isMinimized && (
               <div className="h-[calc(600px-80px)]">
                 <iframe
-                  src="https://app.n8n-tech.cloud/webhook/80032670-58d5-4d08-a1cf-4d1c7aaeca75/chat"
+                  src="https://app.n8n-tech.cloud/webhook/15eb95c0-9e4b-48f0-bd24-87d2994aabed/chat"
                   className="w-full h-full border-0"
                   title="Chat Assistant"
                   allow="microphone; camera"
